@@ -1,0 +1,31 @@
+version: '2'
+services:
+  laravel:
+    image: 'laravel-modules:latest'
+    links:
+      - db
+    ports:
+      - '8080:80'
+    volumes:
+      - './:/var/www/html'
+    environment:
+      APP_ENV: local
+      APP_DEBUG: 'true'
+      APP_KEY: 'base64:oqzQDKvrLdQfp+bnry2/pSQwlFwMcjrtduUJphx5luI='
+      APP_LOCALE: en
+      APP_FALLBACK_LOCALE: en
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: laravel
+      DB_USERNAME: laravel
+      DB_PASSWORD: laravel
+      CACHE_DRIVER: file
+  db:
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: laravel
+      POSTGRES_DB: laravel
+      POSTGRES_USER: laravel
