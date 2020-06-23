@@ -1,6 +1,7 @@
 version: '2'
 services:
   laravel:
+    container_name: laravel-modules
     image: 'pushm0v/php7-apache:latest'
     links:
       - db
@@ -17,7 +18,7 @@ services:
       DB_CONNECTION: pgsql
       DB_HOST: db
       DB_PORT: 5432
-      DB_DATABASE: artist-tms
+      DB_DATABASE: laravel
       DB_USERNAME: postgres
       DB_PASSWORD: password
       CACHE_DRIVER: file
@@ -25,9 +26,7 @@ services:
     image: postgres
     ports:
       - '5432:5432'
-    volumes:
-      - ~/postgresql-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: artist-tms
+      POSTGRES_DB: laravel
       POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password

@@ -2,50 +2,25 @@
 
 namespace App\Repositories;
 
+use App\Interfaces\IUserRepository;
 use App\Models\Users;
 
-class UserRepository implements UserRepositoryInterface
-{
+class UserRepository extends Repository implements IUserRepository {
     /**
-     * Get's a user by it's ID
+     * UserRepository constructor.
      *
-     * @param string
-     * @return collection
+     * @param Users $model
      */
-    public function get($user_id)
+    public function __construct(Users $model)
     {
-        return Users::find($user_id);
+        parent::__construct($model);
     }
 
-    /**
-     * Get's all users.
-     *
-     * @return mixed
-     */
-    public function all()
-    {
-        return Users::all();
-    }
+    public function getUsers() {
+        $users = Users::all();
 
-    /**
-     * Deletes a user.
-     *
-     * @param string
-     */
-    public function delete($user_id)
-    {
-        Users::destroy($user_id);
-    }
-
-    /**
-     * Updates a user.
-     *
-     * @param string
-     * @param array
-     */
-    public function update($user_id, array $user_data)
-    {
-        Users::find($user_id)->update($user_data);
+        return $users;
     }
 }
+
 ?>

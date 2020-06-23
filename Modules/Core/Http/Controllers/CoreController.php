@@ -2,23 +2,18 @@
 
 namespace Modules\Core\Http\Controllers;
 
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use App\Repositories\UserRepositoryInterface;
 
 class CoreController extends Controller
 {
-    protected $users;
+    protected $userSvc;
 
-    /**
-     * PostController constructor.
-     *
-     * @param UserRepositoryInterface $post
-     */
-    public function __construct(UserRepositoryInterface $users)
+    public function __construct(UserService $userService)
     {
-        $this->users = $users;
+        $this->userSvc = $userService;
     }
 
     /**
@@ -27,7 +22,7 @@ class CoreController extends Controller
      */
     public function index()
     {
-        return response()->json($this->users->all(), 200);
+        return response()->json($this->userSvc->getAllUser(), 200);
     }
 
     /**
